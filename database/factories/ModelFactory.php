@@ -22,3 +22,12 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
         'remember_token' => str_random(10),
     ];
 });
+
+$factory->define(App\Appointment::class, function (Faker\Generator $faker) {
+    return [
+        'patient_name' => $faker->name,
+        'patient_phone' => $faker->phoneNumber,
+        'date' => $faker->dateTimeBetween('+1 day', '+2 months'),
+        'comments' => $faker->sentence,
+    ];
+});
