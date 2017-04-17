@@ -57,4 +57,37 @@ class AppointmentTest extends TestCase
         $response->assertStatus(302);
         $this->assertDatabaseMissing('appointments', $appointment->toArray());
     }
+
+    /** @test */
+    public function it_has_a_page_to_edit_an_appointment()
+    {
+        $appointment = factory(Appointment::class)->create();
+
+        $response = $this->get('/appointments/' . $appointment->id);
+
+        $response->assertSee($appointment->patient_name);
+        $response->assertSee($appointment->patient_phone);
+        $response->assertSee($appointment->date->toDateTimeString());
+        $response->assertSee($appointment->comments);
+    }
+
+    /** @test */
+    public function it_can_update_an_appointment()
+    {
+        $appointment = factory(Appointment::class)->create();
+        $this->assertDatabaseHas('appointments', $appointment->toArray());
+
+        $data = [
+            'patient_name' => 'Albert Dupond',
+            'patient_phone' => '+33 6 58 62 51 10',
+            'date' => Carbon::now()->toDateTimeString(),
+            'comments' => 'New patient.',
+        ];
+
+        $response = $this->put('/appointments/' . $appointment->id, $data);
+
+        $response->assertStatus(302);
+        $this->assertDatabaseMissing('appointments', $appointment->toArray());
+        $this->assertDatabaseHas('appointments', $data);
+    }
 }

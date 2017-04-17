@@ -26,6 +26,9 @@
                     <td>{{ $appointment->date->toDateTimeString() }}</td>
                     <td>{{ $appointment->comments }}</td>
                     <td>
+                        <form method="get" action="/appointments/{{ $appointment->id }}">
+                            <button type="submit" class="btn btn-default">Edit</button>
+                        </form>
                         <form method="post" action="/appointments/{{ $appointment->id }}">
                             {{ csrf_field() }}
                             {{ method_field('delete') }}

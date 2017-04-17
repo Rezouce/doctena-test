@@ -32,4 +32,22 @@ class AppointmentController extends Controller
 
         return redirect('appointments');
     }
+
+    public function show(Appointment $appointment)
+    {
+        return view('appointments/edit', ['appointment' => $appointment]);
+    }
+
+    public function update(Request $request, Appointment $appointment)
+    {
+        $this->validate($request, [
+            'patient_name' => 'required',
+            'patient_phone' => 'required',
+            'date' => 'date_format:Y-m-d H:i:s|required',
+        ]);
+
+        $appointment->update($request->all());
+
+        return redirect('appointments');
+    }
 }
