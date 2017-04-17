@@ -1,3 +1,6 @@
+@extends('layout')
+
+@section('content')
 <table>
     <tr>
         <th>Patient's name</th>
@@ -14,3 +17,4 @@
     </tr>
     @endforeach
 </table>
+@endsection
