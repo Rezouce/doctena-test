@@ -12,4 +12,17 @@ class AppointmentController extends Controller
     {
         return view('appointments/index', ['appointments' => Appointment::all()]);
     }
+
+    public function store(Request $request)
+    {
+        $this->validate($request, [
+            'patient_name' => 'required',
+            'patient_phone' => 'required',
+            'date' => 'date_format:Y-m-d H:i:s|required',
+        ]);
+
+        Appointment::create($request->all());
+
+        return redirect('appointments');
+    }
 }
