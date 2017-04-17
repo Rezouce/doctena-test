@@ -17,3 +17,4 @@ Route::get('/', function () {
 
 Route::get('/appointments', 'AppointmentController@index');
 Route::post('/appointments', 'AppointmentController@store');
+Route::delete('/appointments/{appointment}', 'AppointmentController@delete');

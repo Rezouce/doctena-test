@@ -25,4 +25,11 @@ class AppointmentController extends Controller
 
         return redirect('appointments');
     }
+
+    public function delete(Appointment $appointment)
+    {
+        $appointment->delete();
+
+        return redirect('appointments');
+    }
 }

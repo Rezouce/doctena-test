@@ -17,6 +17,7 @@
                 <th>Patient's phone</th>
                 <th>Date</th>
                 <th>Comments</th>
+                <th>Actions</th>
             </tr>
             @foreach($appointments as $appointment)
                 <tr>
@@ -24,6 +25,13 @@
                     <td>{{ $appointment->patient_phone }}</td>
                     <td>{{ $appointment->date->toDateTimeString() }}</td>
                     <td>{{ $appointment->comments }}</td>
+                    <td>
+                        <form method="post" action="/appointments/{{ $appointment->id }}">
+                            {{ csrf_field() }}
+                            {{ method_field('delete') }}
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    </td>
                 </tr>
             @endforeach
         </table>

@@ -45,4 +45,16 @@ class AppointmentTest extends TestCase
         $response->assertStatus(302);
         $this->assertDatabaseHas('appointments', $data);
     }
+
+    /** @test */
+    public function it_deletes_an_existing_appointment()
+    {
+        $appointment = factory(Appointment::class)->create();
+        $this->assertDatabaseHas('appointments', $appointment->toArray());
+
+        $response = $this->delete('/appointments/' . $appointment->id);
+
+        $response->assertStatus(302);
+        $this->assertDatabaseMissing('appointments', $appointment->toArray());
+    }
 }
