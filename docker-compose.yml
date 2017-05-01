@@ -1,0 +1,28 @@
+version: '2'
+
+services:
+  rabbitmq:
+    image: rabbitmq
+    networks:
+      - doctena
+  php:
+    build: ./docker/php
+    environment:
+      - APP_ENV=docker
+    volumes:
+      - ./:/app
+    networks:
+      - doctena
+  nginx:
+    image: nginx
+    ports:
+      - "8080:80"
+    volumes:
+      - ./:/app
+      - ./docker/nginx/site.conf:/etc/nginx/conf.d/site.conf
+    networks:
+      - doctena
+
+networks:
+  doctena:
+    driver: bridge
