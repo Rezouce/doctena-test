@@ -24,6 +24,13 @@ When you're inside your container, you can use the artisan listener command `php
 
 You're now ready to use the application.
 
+# End points
+
+There are 2 main end points:
+
+- `/appointments` which will allow you to test the CRUD part of the application.
+- `/logs` which shows a list of all logs recorded.
+
 # Execute tests
 
 You can run the tests using the command `vendor\bin\phpunit`.
