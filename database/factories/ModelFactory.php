@@ -25,7 +25,7 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
 
 $factory->define(App\Appointment::class, function (Faker\Generator $faker) {
     return [
-        'patient_name' => $faker->name,
+        'patient_name' => str_replace("'", '', $faker->name),
         'patient_phone' => $faker->phoneNumber,
         'date' => $faker->dateTimeBetween('+1 day', '+2 months'),
         'comments' => $faker->sentence,
